@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,7 @@
             background: linear-gradient(135deg, #dc0000 0%, #a00000 100%);
             color: #ffd700;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -38,13 +39,13 @@
 
         .logo {
             font-size: 2em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header-text h1 {
             font-size: 1.5em;
             margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header-text p {
@@ -66,7 +67,7 @@
             width: 400px;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -267,7 +268,7 @@
             flex: 1;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             border: 3px solid #ffd700;
         }
@@ -306,15 +307,284 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .loading {
             animation: pulse 1.5s infinite;
         }
+
+        /* Nút gọi khẩn cấp */
+        .emergency-call-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            border: 4px solid #ffd700;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(220, 0, 0, 0.6), 0 0 0 0 rgba(220, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            z-index: 10000;
+            transition: all 0.3s ease;
+            animation: buttonPulse 2s infinite;
+        }
+
+        .emergency-call-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(220, 0, 0, 0.8), 0 0 0 15px rgba(220, 0, 0, 0.3);
+        }
+
+        .emergency-call-btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes buttonPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 20px rgba(220, 0, 0, 0.6), 0 0 0 0 rgba(220, 0, 0, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 4px 20px rgba(220, 0, 0, 0.6), 0 0 0 20px rgba(220, 0, 0, 0);
+            }
+        }
+
+        .emergency-tooltip {
+            position: absolute;
+            right: 85px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #ffd700;
+            padding: 10px 15px;
+            border-radius: 8px;
+            white-space: nowrap;
+            font-size: 0.9em;
+            font-weight: bold;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 2px solid #ffd700;
+        }
+
+        .emergency-call-btn:hover .emergency-tooltip {
+            opacity: 1;
+        }
+
+        /* Modal cho danh sách số điện thoại */
+        .emergency-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10001;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .emergency-modal.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .emergency-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 4px solid #ffd700;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.4s ease;
+        }
+
+        .emergency-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .emergency-header h2 {
+            color: #dc0000;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .emergency-header p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #dc0000;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            background: #a00000;
+            transform: rotate(90deg);
+        }
+
+        .nearest-stations-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nearest-station-item {
+            background: linear-gradient(135deg, #fff9e6 0%, #fffaf0 100%);
+            border: 3px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .nearest-station-item:hover {
+            border-color: #dc0000;
+            box-shadow: 0 5px 15px rgba(220, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .station-rank {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc0000 0%, #a00000 100%);
+            color: #ffd700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border: 2px solid #ffd700;
+        }
+
+        .nearest-station-name {
+            font-weight: bold;
+            color: #dc0000;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .nearest-station-info {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .nearest-station-phone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .phone-number {
+            flex: 1;
+            background: white;
+            border: 2px solid #dc0000;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #dc0000;
+            font-size: 1.1em;
+        }
+
+        .call-now-btn {
+            background: linear-gradient(135deg, #dc0000 0%, #a00000 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .call-now-btn:hover {
+            background: linear-gradient(135deg, #a00000 0%, #800000 100%);
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(220, 0, 0, 0.4);
+        }
+
+        .no-location-warning {
+            text-align: center;
+            padding: 20px;
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            color: #856404;
+        }
+
+        .no-location-warning h3 {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="header-content">
@@ -352,6 +622,26 @@
 
         <div class="map-container">
             <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Nút gọi khẩn cấp -->
+    <div class="emergency-call-btn" id="emergencyCallBtn">
+        📞
+        <div class="emergency-tooltip">Gọi điện thoại đến cơ quan công an gần nhất</div>
+    </div>
+
+    <!-- Modal hiển thị số điện thoại -->
+    <div class="emergency-modal" id="emergencyModal">
+        <div class="emergency-content">
+            <button class="close-modal" id="closeModal">×</button>
+            <div class="emergency-header">
+                <h2>🚨 CƠ QUAN CÔNG AN GẦN NHẤT</h2>
+                <p>Số điện thoại khẩn cấp</p>
+            </div>
+            <div id="nearestStationsList" class="nearest-stations-list">
+                <!-- Danh sách sẽ được thêm bằng JavaScript -->
+            </div>
         </div>
     </div>
 
@@ -467,10 +757,10 @@
             const R = 6371; // Bán kính Trái Đất (km)
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c;
         }
 
@@ -554,7 +844,7 @@
         }
 
         // Phát hiện vị trí người dùng
-        document.getElementById('detect-location').addEventListener('click', function() {
+        document.getElementById('detect-location').addEventListener('click', function () {
             const btn = this;
             btn.disabled = true;
             btn.textContent = '🔄 Đang xác định...';
@@ -626,7 +916,7 @@
         }
 
         // Tìm kiếm
-        document.getElementById('search-input').addEventListener('input', function(e) {
+        document.getElementById('search-input').addEventListener('input', function (e) {
             const searchTerm = e.target.value.toLowerCase();
             const filtered = policeStations.filter(station =>
                 station.name.toLowerCase().includes(searchTerm) ||
@@ -638,7 +928,7 @@
 
         // Filter tabs
         document.querySelectorAll('.filter-tabs button').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 document.querySelectorAll('.filter-tabs button').forEach(btn =>
                     btn.classList.remove('active')
                 );
@@ -667,8 +957,95 @@
             window.location.href = `tel:${phone}`;
         }
 
+        // Xử lý nút gọi khẩn cấp
+        document.getElementById('emergencyCallBtn').addEventListener('click', function () {
+            showNearestStations();
+        });
+
+        // Đóng modal
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('emergencyModal').classList.remove('show');
+        });
+
+        // Đóng modal khi click bên ngoài
+        document.getElementById('emergencyModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                this.classList.remove('show');
+            }
+        });
+
+        // Hiển thị 3 cơ quan công an gần nhất
+        function showNearestStations() {
+            const modal = document.getElementById('emergencyModal');
+            const listContainer = document.getElementById('nearestStationsList');
+
+            if (!userLocation) {
+                // Nếu chưa xác định vị trí, hiển thị thông báo
+                listContainer.innerHTML = `
+                    <div class="no-location-warning">
+                        <h3>⚠️ Chưa xác định vị trí</h3>
+                        <p>Vui lòng nhấn nút "Phát hiện vị trí của tôi" để xác định vị trí và tìm cơ quan công an gần nhất.</p>
+                        <p style="margin-top: 10px;">Dưới đây là danh sách tất cả các cơ quan công an:</p>
+                    </div>
+                `;
+
+                // Hiển thị tất cả các trụ sở
+                const allStationsHTML = policeStations.slice(0, 3).map((station, index) => `
+                    <div class="nearest-station-item">
+                        <div class="station-rank">Thứ ${index + 1}</div>
+                        <div class="nearest-station-name">${station.name}</div>
+                        <div class="nearest-station-info">
+                            📍 ${station.address}
+                        </div>
+                        <div class="nearest-station-phone">
+                            <div class="phone-number">📞 ${station.phone}</div>
+                            <button class="call-now-btn" onclick="callStation('${station.phone}')">
+                                Gọi ngay
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                listContainer.innerHTML += allStationsHTML;
+            } else {
+                // Tính khoảng cách và sắp xếp
+                const stationsWithDistance = policeStations.map(station => {
+                    const distance = calculateDistance(
+                        userLocation.lat,
+                        userLocation.lng,
+                        station.lat,
+                        station.lng
+                    );
+                    return { ...station, distance };
+                }).sort((a, b) => a.distance - b.distance);
+
+                // Lấy 3 trụ sở gần nhất
+                const nearest3 = stationsWithDistance.slice(0, 3);
+
+                listContainer.innerHTML = nearest3.map((station, index) => `
+                    <div class="nearest-station-item">
+                        <div class="station-rank">${index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'} Gần nhất thứ ${index + 1} - ${station.distance.toFixed(1)} km</div>
+                        <div class="nearest-station-name">${station.name}</div>
+                        <div class="nearest-station-info">
+                            📍 ${station.address}
+                        </div>
+                        <div class="nearest-station-phone">
+                            <div class="phone-number">📞 ${station.phone}</div>
+                            <button class="call-now-btn" onclick="callStation('${station.phone}')">
+                                Gọi ngay
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            modal.classList.add('show');
+        }
+
         // Khởi tạo
         initMap();
     </script>
 </body>
+
 </html>
+```
